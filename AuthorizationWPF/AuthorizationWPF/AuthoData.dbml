@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Производство" Class="AuthoDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-BLH070P;Initial Catalog=Производство;Integrated Security=True" SettingsObjectName="AuthorizationWPF.Properties.Settings" SettingsPropertyName="ПроизводствоConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Furniture" Member="Furniture">
+    <Type Name="Furniture">
+      <Column Name="IdFurniture" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ArticteF" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="WidthInMillimetr" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="LengthInMillimetr" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Photo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Furniture_ProductFurniture" Member="ProductFurniture" ThisKey="IdFurniture" OtherKey="IdFurniture" Type="ProductFurniture" />
+      <Association Name="Furniture_WarehouseOfFurniture" Member="WarehouseOfFurniture" ThisKey="IdFurniture" OtherKey="IdFurniture" Type="WarehouseOfFurniture" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Order]" Member="Order">
+    <Type Name="Order">
+      <Column Name="Number" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdStageOfExecution" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Customer" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Manager" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Association Name="OrderedProduct_Order" Member="OrderedProduct" ThisKey="Number" OtherKey="OrderNumber" Type="OrderedProduct" IsForeignKey="true" />
+      <Association Name="StageOfExecution_Order" Member="StageOfExecution" ThisKey="IdStageOfExecution" OtherKey="IdStageOfExecution" Type="StageOfExecution" IsForeignKey="true" />
+      <Association Name="User_Order" Member="User" ThisKey="Customer" OtherKey="Login" Type="User" IsForeignKey="true" />
+      <Association Name="User_Order1" Member="User1" ThisKey="Manager" OtherKey="Login" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderedProduct" Member="OrderedProduct">
+    <Type Name="OrderedProduct">
+      <Column Name="OrderNumber" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdProduct" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Qty" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Association Name="OrderedProduct_Order" Member="Order" ThisKey="OrderNumber" OtherKey="Number" Type="Order" />
+      <Association Name="Product_OrderedProduct" Member="Product" ThisKey="IdProduct" OtherKey="IdProduct" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Product" Member="Product">
+    <Type Name="Product">
+      <Column Name="IdProduct" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Article" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="WidthInMillimetr" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="LengthInMillimetr" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Photo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="Product_OrderedProduct" Member="OrderedProduct" ThisKey="IdProduct" OtherKey="IdProduct" Type="OrderedProduct" />
+      <Association Name="Product_ProductFabric" Member="ProductFabric" ThisKey="IdProduct" OtherKey="IdProduct" Type="ProductFabric" />
+      <Association Name="Product_ProductFurniture" Member="ProductFurniture" ThisKey="IdProduct" OtherKey="IdProduct" Type="ProductFurniture" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductFabric" Member="ProductFabric">
+    <Type Name="ProductFabric">
+      <Column Name="IdTextile" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdProduct" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdProductFabric" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="Product_ProductFabric" Member="Product" ThisKey="IdProduct" OtherKey="IdProduct" Type="Product" IsForeignKey="true" />
+      <Association Name="Textile_ProductFabric" Member="Textile" ThisKey="IdTextile" OtherKey="IdTextile" Type="Textile" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductFurniture" Member="ProductFurniture">
+    <Type Name="ProductFurniture">
+      <Column Name="IdFurniture" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdProduct" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Placing" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Width" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Length" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Rotation" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Qty" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Association Name="Furniture_ProductFurniture" Member="Furniture" ThisKey="IdFurniture" OtherKey="IdFurniture" Type="Furniture" IsForeignKey="true" />
+      <Association Name="Product_ProductFurniture" Member="Product" ThisKey="IdProduct" OtherKey="IdProduct" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StageOfExecution" Member="StageOfExecution">
+    <Type Name="StageOfExecution">
+      <Column Name="IdStageOfExecution" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="StageOfExecution_Order" Member="Order" ThisKey="IdStageOfExecution" OtherKey="IdStageOfExecution" Type="Order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Textile" Member="Textile">
+    <Type Name="Textile">
+      <Column Name="IdTextile" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Article" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Color" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Picture" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Photo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Composition" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="WidthInSm" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="LengthInMeters" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Textile_ProductFabric" Member="ProductFabric" ThisKey="IdTextile" OtherKey="IdTextile" Type="ProductFabric" />
+      <Association Name="Textile_WarehouseOfTextile" Member="WarehouseOfTextile" ThisKey="IdTextile" OtherKey="IdTextile" Type="WarehouseOfTextile" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="User">
+    <Type Name="User">
+      <Column Name="Login" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdRole" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="User_Order" Member="Order" ThisKey="Login" OtherKey="Customer" Type="Order" />
+      <Association Name="User_Order1" Member="Order1" ThisKey="Login" OtherKey="Manager" Type="Order" />
+      <Association Name="User_Bookings" Member="Bookings" ThisKey="Login" OtherKey="LoginManager" Type="Bookings" />
+      <Association Name="User_Bookings1" Member="Bookings1" ThisKey="Login" OtherKey="LoginUser" Type="Bookings" />
+      <Association Name="UserRole_User" Member="UserRole" ThisKey="IdRole" OtherKey="IdPole" Type="UserRole" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserRole" Member="UserRole">
+    <Type Name="UserRole">
+      <Column Name="IdPole" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="UserRole_User" Member="User" ThisKey="IdPole" OtherKey="IdRole" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WarehouseOfFurniture" Member="WarehouseOfFurniture">
+    <Type Name="WarehouseOfFurniture">
+      <Column Name="Part" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdFurniture" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Qty" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Association Name="Furniture_WarehouseOfFurniture" Member="Furniture" ThisKey="IdFurniture" OtherKey="IdFurniture" Type="Furniture" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WarehouseOfTextile" Member="WarehouseOfTextile">
+    <Type Name="WarehouseOfTextile">
+      <Column Name="Roll" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdTextile" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Width" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Length" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="Textile_WarehouseOfTextile" Member="Textile" ThisKey="IdTextile" OtherKey="IdTextile" Type="Textile" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Bookings" Member="Bookings">
+    <Type Name="Bookings">
+      <Column Name="IdBooking" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdGood" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LoginUser" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LoginManager" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Cnt" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="Cdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="User_Bookings" Member="User" ThisKey="LoginManager" OtherKey="Login" Type="User" IsForeignKey="true" />
+      <Association Name="User_Bookings1" Member="User1" ThisKey="LoginUser" OtherKey="Login" Type="User" IsForeignKey="true" />
+      <Association Name="Goods_Bookings" Member="Goods" ThisKey="IdGood" OtherKey="IdGood" Type="Goods" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Goods" Member="Goods">
+    <Type Name="Goods">
+      <Column Name="IdGood" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Article" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="Cdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Goods_Bookings" Member="Bookings" ThisKey="IdGood" OtherKey="IdGood" Type="Bookings" />
+    </Type>
+  </Table>
+</Database>
