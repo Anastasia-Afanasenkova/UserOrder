@@ -34,9 +34,9 @@ namespace AuthorizationWPF
             AddTkani addTkani = new AddTkani();
             if (addTkani.ShowDialog() != false)
             {
-                if (addTkani.textBox1.Text != null)
+                if (addTkani.c1.Text != null)
                 {
-                    Textile addPic = Autho.Textile.FirstOrDefault(t => t.Name == addTkani.textBox1.Text);
+                    Textile addPic = Autho.Textile.FirstOrDefault(t => t.Name == addTkani.c1.Text);
                     addPic.Photo = addTkani.photo;
                     Autho.SubmitChanges();
                 }

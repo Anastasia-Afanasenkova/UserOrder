@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="Добавить ткань" Height="237.188" Width="305.938">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="31,33,0,0" TextWrapping="Wrap" Text="Название ткани" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="31,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239"/>
+        <TextBlock HorizontalAlignment="Left" Margin="31,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Артикул"/><Run Text=" ткани"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="31,82,0,0" TextWrapping="Wrap" Text="Рисунок" VerticalAlignment="Top"/>
         <Button Content="Загрузить изображение" HorizontalAlignment="Left" Margin="31,103,0,0" VerticalAlignment="Top" Width="239" Height="32" Click="Button_Click"/>
         <Button Content="Закрыть" HorizontalAlignment="Left" Margin="31,143,0,0" VerticalAlignment="Top" Width="114" Height="32" Click="Button_Click_1"/>
         <Button Content="Сохранить" HorizontalAlignment="Left" Margin="156,143,0,0" VerticalAlignment="Top" Width="114" Height="32" Click="Button_Click_2"/>
+        <ComboBox x:Name="c1" HorizontalAlignment="Left" Margin="31,55,0,0" VerticalAlignment="Top" Width="239"/>
 
     </Grid>
 </Window>

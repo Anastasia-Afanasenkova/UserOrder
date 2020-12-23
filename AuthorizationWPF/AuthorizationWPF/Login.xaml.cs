@@ -19,6 +19,7 @@ namespace AuthorizationWPF
     {
         public MainWindow mWindow;
         public AuthoDataDataContext Autho = new AuthoDataDataContext();
+        public static string userLogin { get; set; }
 
         public Login(MainWindow mainWindow)
         {
@@ -54,6 +55,7 @@ namespace AuthorizationWPF
                     }
                 else
                     MessageBox.Show("Такого пользователя не существует", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                userLogin = textBox1.Text;
             }
         }
     }

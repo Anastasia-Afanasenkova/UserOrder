@@ -23,7 +23,7 @@ namespace AuthorizationWPF
         public UserOrder()
         {
             InitializeComponent();
-            d1.ItemsSource = Autho.Order;
+            d1.ItemsSource = Autho.Order.Where(o => o.User.Login == Login.userLogin);
             c1.ItemsSource = Autho.Goods.Select(g => g.Article);
         }
 
@@ -52,6 +52,21 @@ namespace AuthorizationWPF
         {
             Autho.Order.DeleteOnSubmit((Order)d1.SelectedItem);
             Autho.SubmitChanges();
+        }
+
+        private void t1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (c1.Text != "")
+            {
+                try
+                {
+                    l1.Text = $"= {Autho.Goods.FirstOrDefault(g => g.Article == c1.Text).Price * Convert.ToInt32(t1.Text)}";
+                }
+                catch
+                {
+                    MessageBox.Show("Введите числовое значение");
+                }
+            }
         }
     }
 }

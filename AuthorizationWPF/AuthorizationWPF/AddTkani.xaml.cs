@@ -21,10 +21,12 @@ namespace AuthorizationWPF
     /// </summary>
     public partial class AddTkani : Window
     {
+        public AuthoDataDataContext Autho = new AuthoDataDataContext();
         public byte[] photo { get; set; }
         public AddTkani()
         {
             InitializeComponent();
+            c1.ItemsSource = Autho.Textile.Select(t => t.Article);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
