@@ -35,21 +35,7 @@
       <Column Name="IdProduct" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Qty" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
       <Association Name="OrderedProduct_Order" Member="Order" ThisKey="OrderNumber" OtherKey="Number" Type="Order" />
-      <Association Name="Product_OrderedProduct" Member="Product" ThisKey="IdProduct" OtherKey="IdProduct" Type="Product" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Product" Member="Product">
-    <Type Name="Product">
-      <Column Name="IdProduct" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Article" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="WidthInMillimetr" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="LengthInMillimetr" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="Photo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Association Name="Product_OrderedProduct" Member="OrderedProduct" ThisKey="IdProduct" OtherKey="IdProduct" Type="OrderedProduct" />
-      <Association Name="Product_ProductFabric" Member="ProductFabric" ThisKey="IdProduct" OtherKey="IdProduct" Type="ProductFabric" />
-      <Association Name="Product_ProductFurniture" Member="ProductFurniture" ThisKey="IdProduct" OtherKey="IdProduct" Type="ProductFurniture" />
+      <Association Name="Product1_OrderedProduct" Member="Product" Storage="_Product1" ThisKey="IdProduct" OtherKey="IdProduct" Type="Product" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProductFabric" Member="ProductFabric">
@@ -57,8 +43,8 @@
       <Column Name="IdTextile" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdProduct" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdProductFabric" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Association Name="Product_ProductFabric" Member="Product" ThisKey="IdProduct" OtherKey="IdProduct" Type="Product" IsForeignKey="true" />
       <Association Name="Textile_ProductFabric" Member="Textile" ThisKey="IdTextile" OtherKey="IdTextile" Type="Textile" IsForeignKey="true" />
+      <Association Name="Product1_ProductFabric" Member="Product" Storage="_Product1" ThisKey="IdProduct" OtherKey="IdProduct" Type="Product" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProductFurniture" Member="ProductFurniture">
@@ -71,7 +57,7 @@
       <Column Name="Rotation" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
       <Column Name="Qty" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
       <Association Name="Furniture_ProductFurniture" Member="Furniture" ThisKey="IdFurniture" OtherKey="IdFurniture" Type="Furniture" IsForeignKey="true" />
-      <Association Name="Product_ProductFurniture" Member="Product" ThisKey="IdProduct" OtherKey="IdProduct" Type="Product" IsForeignKey="true" />
+      <Association Name="Product1_ProductFurniture" Member="Product" Storage="_Product1" ThisKey="IdProduct" OtherKey="IdProduct" Type="Product" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.StageOfExecution" Member="StageOfExecution">
@@ -156,6 +142,21 @@
       <Column Name="Price" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
       <Column Name="Cdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Association Name="Goods_Bookings" Member="Bookings" ThisKey="IdGood" OtherKey="IdGood" Type="Bookings" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Product" Member="Product">
+    <Type Name="Product">
+      <Column Name="IdProduct" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Article" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="WidthInMillimetr" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="LengthInMillimetr" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Photo" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Product1_OrderedProduct" Member="OrderedProduct" ThisKey="IdProduct" OtherKey="IdProduct" Type="OrderedProduct" />
+      <Association Name="Product1_ProductFabric" Member="ProductFabric" ThisKey="IdProduct" OtherKey="IdProduct" Type="ProductFabric" />
+      <Association Name="Product1_ProductFurniture" Member="ProductFurniture" ThisKey="IdProduct" OtherKey="IdProduct" Type="ProductFurniture" />
     </Type>
   </Table>
 </Database>

@@ -18,12 +18,10 @@
         <TextBlock HorizontalAlignment="Left" Margin="37.75,10,0,0" TextWrapping="Wrap" Text="Количество" VerticalAlignment="Top" Grid.Column="1"/>
         <TextBlock HorizontalAlignment="Left" Margin="118.75,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Grid.Column="1"><Run Text="Стоимость"/><LineBreak/><Run/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="248.75,10,0,0" TextWrapping="Wrap" Text="Корзина" VerticalAlignment="Top" Grid.Column="1"/>
-        <DataGrid x:Name="d1" HorizontalAlignment="Left" Height="317" Margin="248.75,31,0,0" VerticalAlignment="Top" Width="436" Grid.Column="1"/>
-        <Button Content="Добавить" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="75" Height="29" Click="Button_Click_1"/>
-        <Button Content="Удалить" HorizontalAlignment="Left" Margin="90,107,0,0" VerticalAlignment="Top" Width="75" Height="29" Grid.ColumnSpan="2" Click="Button_Click_2"/>
+        <DataGrid x:Name="d1" HorizontalAlignment="Left" Height="345" Margin="249,31,0,0" VerticalAlignment="Top" Width="436" Grid.Column="1"/>
+        <Button Content="Добавить" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="75" Height="29" Click="Button_Click_1"/>
+        <Button Content="Удалить" HorizontalAlignment="Left" Margin="90,58,0,0" VerticalAlignment="Top" Width="75" Height="29" Grid.ColumnSpan="2" Click="Button_Click_2"/>
         <Button Content="Закрыть" HorizontalAlignment="Left" Margin="608.75,381,0,0" VerticalAlignment="Top" Width="76" Height="28" Grid.Column="1" Click="Button_Click"/>
-        <TextBox x:Name="t2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="10,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="331"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,58,0,0" TextWrapping="Wrap" Text="Имя пользователя" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="105"/>
 
     </Grid>
 </Window>

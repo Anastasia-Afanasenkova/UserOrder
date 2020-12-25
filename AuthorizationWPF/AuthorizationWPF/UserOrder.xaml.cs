@@ -24,7 +24,7 @@ namespace AuthorizationWPF
         {
             InitializeComponent();
             d1.ItemsSource = Autho.Order.Where(o => o.User.Login == Login.userLogin);
-            c1.ItemsSource = Autho.Goods.Select(g => g.Article);
+            c1.ItemsSource = Autho.Product.Select(p => p.Article);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,14 +34,21 @@ namespace AuthorizationWPF
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            l1.Text = $"= {Autho.Goods.FirstOrDefault(g => g.Article == c1.Text).Price * Convert.ToInt32(t1.Text)}";
+            OrderedProduct orderedProduct = new OrderedProduct
+            {
+                IdProduct = Autho.Product.FirstOrDefault(p => p.Article == c1.Text).IdProduct,
+                Qty = Convert.ToInt16(t1.Text)
+            };
+            Autho.OrderedProduct.InsertOnSubmit(orderedProduct);
+            Autho.SubmitChanges();
+            l1.Text = $"= {Autho.Product.FirstOrDefault(p => p.Article == c1.Text).Price * Convert.ToInt32(t1.Text)}";
             Order order = new Order
             {
-                Number = Convert.ToInt32(t1.Text),
+                Number = Autho.OrderedProduct.FirstOrDefault(op => op.IdProduct == Autho.Product.FirstOrDefault(p => p.Article == c1.Text).IdProduct).OrderNumber,
                 Date = DateTime.Now,
                 IdStageOfExecution = 1,
-                Customer = t2.Text,
-                Cost = Autho.Goods.FirstOrDefault(g => g.Article == c1.Text).Price * Convert.ToInt32(t1.Text)
+                Customer = Login.userLogin,
+                Cost = Autho.Product.FirstOrDefault(p => p.Article == c1.Text).Price * Convert.ToInt32(t1.Text)
             };
             Autho.Order.InsertOnSubmit(order);
             Autho.SubmitChanges();
@@ -60,7 +67,7 @@ namespace AuthorizationWPF
             {
                 try
                 {
-                    l1.Text = $"= {Autho.Goods.FirstOrDefault(g => g.Article == c1.Text).Price * Convert.ToInt32(t1.Text)}";
+                    l1.Text = $"= {Autho.Product.FirstOrDefault(p => p.Article == c1.Text).Price * Convert.ToInt32(t1.Text)}";
                 }
                 catch
                 {
